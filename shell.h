@@ -15,41 +15,40 @@
 
 /* macros */
 
-#define CHECK_ISATTY_OUT \
-	do {\
+#define ISATTYOUT \
+do {\
 	if (isatty(0) == 0)\
 		break;\
-	} while (0)
+} while (0)
 
-#define CHECK_ISATTY_PROMPT(PROMPT, LEN) \
-	do {\
+#define ISATTYPROMPT(PROMPT, LEN) \
+do {\
 	if (isatty(0) == 1)\
 		write(STDOUT_FILENO, (PROMPT), (LEN));\
-	} while (0)
+} while (0)
 
-#define FREE_RESOURCES_ON_ERROR(LINE, ARGV_START, ARGV_ZERO, ARGV, ERRORLINE) \
-		do {\
-		write(STDERR_FILENO, ERRORLINE, _strlen(ERRORLINE));\
-		free(ERRORLINE);\
-		if (ARGV_START == 1)\
-			free(ARGV_ZERO);\
-		free(ARGV);\
-		free(LINE);\
-		} while (0)
+#define FREEWRITE(LINE, ARGV, ERRORLINE) \
+do {\
+	write(STDERR_FILENO, ERRORLINE, _strlen(ERRORLINE));\
+	free(ERRORLINE);\
+	free(ARGV);\
+	free(LINE);\
+} while (0)
 
-#define FREE_RESOURCES_AND_EXIT(LINE, ARGV, ERRORLINE) \
-		do {\
-		free(LINE);\
-		free(ARGV);\
-		free(ERRORLINE);\
-		exit(EXIT_FAILURE);\
-		} while (0)
+#define FREELAR(LINE, ARST, ARZ, AR, ERRORLINE) \
+do {\
+	free(LINE);\
+	if (ARST == 1)\
+		free(ARZ);\
+	free(AR);\
+	free(ERRORLINE);\
+} while (0)
 
-#define CHECK_ISATTY_RESULT(N)\
-		do {\
-		if (isatty(0) != (N))\
-			break;\
-		} while (0)
+#define ISATTY(N)\
+do {\
+	if (isatty(0) != (N))\
+		break;\
+} while (0)
 
 /* functions */
 
