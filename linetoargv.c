@@ -15,7 +15,7 @@ char *_getenv(char *name)
 	{
 		envlen = _strlen(environ[i]);
 		extenv = malloc(sizeof(*extenv) * (envlen + 1));
-		if (extractenv == NULL)
+		if (extenv == NULL)
 			return (NULL);
 		extenv = _strcpy(extenv, environ[i]);
 		extenv = strtok(extenv, "=");
