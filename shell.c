@@ -1,39 +1,26 @@
-#include <stdio.h>
-#include <unistd.h>
-
-#define BUFFER_SIZE 1024
-
 int main(void)
 {
-	char buffer[BUFFER_SIZE];
-	ssize_t bytes_read;
+	char buffer[1024];
 	int error_code;
+	size_t length;
 
 	while (1) {
-		printf("$ ");  // Prompt
-		bytes_read = read(STDIN_FILENO, buffer, BUFFER_SIZE);
-
-		if (bytes_read == 0) {
-			// EOF (Ctrl+D)
-			printf("\n");
-			break;
-		} else if (bytes_read == -1) {
-			// Error
+		printf("$ "); /* Prompt */
+		length = read(STDIN_FILENO, buffer, sizeof(buffer));
+		if (length == -1) {
 			perror("read");
-			continue;
+			return (EXIT_FAILURE);
 		}
-
-		// Remove trailing newline character
-		if (buffer[bytes_read - 1] == '\n') {
-			buffer[bytes_read - 1] = '\0';
+		if (length == 0) {
+			printf("\n");
+			return (EXIT_SUCCESS);
 		}
-
-		// Execute command
-		error_code = execve(buffer, (char *const[]) { buffer, NULL }, NULL);
+		buffer[length - 1] = '\0';
+		char *args[] = { buffer, NULL };
+		error_code = execve(buffer, args, NULL);
 		if (error_code == -1) {
 			perror("execve");
+			return (EXIT_FAILURE);
 		}
 	}
-
-	return 0;
 }
