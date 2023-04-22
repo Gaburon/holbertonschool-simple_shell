@@ -8,25 +8,25 @@
 
 char *_getenv(char *name)
 {
-	char *extenv;
+	char *extractenv;
 	int difference, i, envlen;
 
 	for (i = 0; environ[i]; i++)
 	{
 		envlen = _strlen(environ[i]);
-		extenv = malloc(sizeof(*extenv) * (envlen + 1));
-		if (extenv == NULL)
+		extractenv = malloc(sizeof(*extractenv) * (envlen + 1));
+		if (extractenv == NULL)
 			return (NULL);
-		extenv = _strcpy(extenv, environ[i]);
-		extenv = strtok(extenv, "=");
-		difference = _strcmp(name, extenv);
+		extractenv = _strcpy(extractenv, environ[i]);
+		extractenv = strtok(extractenv, "=");
+		difference = _strcmp(name, extractenv);
 		if (difference == 0)
 		{
-			free(extenv);
+			free(extractenv);
 			return (environ[i]);
 		}
 		else
-			free(extenv);
+			free(extractenv);
 	}
 	return (NULL);
 }
@@ -130,7 +130,7 @@ int linetoargv(char *line, char **argv, ssize_t linelen)
 	if (auxline != NULL)
 		free(auxline);
 	if (filestatus == 0 || _strcmp(argv[0], "exit") == 0 ||
-	    _strcmp(argv[0], "env") == 0)
+			 _strcmp(argv[0], "env") == 0)
 		return (0);
 	return (-1);
 }
