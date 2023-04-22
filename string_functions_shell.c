@@ -108,7 +108,7 @@ int count_words(char *s)
 		return (ret);
 	for (i = 0; s[i]; i++)
 	{
-		if (s[i] == ' ' || s[i] == '')
+		if (s[i] == ' ' || s[i] == ' ')
 			ret++;
 	}
 	return (ret);
