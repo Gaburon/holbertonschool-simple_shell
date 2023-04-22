@@ -8,25 +8,25 @@
 
 char *_getenv(char *name)
 {
-	char *extractenv;
+	char *extenv;
 	int difference, i, envlen;
 
 	for (i = 0; environ[i]; i++)
 	{
 		envlen = _strlen(environ[i]);
-		extractenv = malloc(sizeof(*extractenv) * (envlen + 1));
+		extenv = malloc(sizeof(*extenv) * (envlen + 1));
 		if (extractenv == NULL)
 			return (NULL);
-		extractenv = _strcpy(extractenv, environ[i]);
-		extractenv = strtok(extractenv, "=");
-		difference = _strcmp(name, extractenv);
+		extv = _strcpy(extenv, environ[i]);
+		extenv = strtok(extenv, "=");
+		difference = _strcmp(name, extenv);
 		if (difference == 0)
 		{
-			free(extractenv);
+			free(extenv);
 			return (environ[i]);
 		}
 		else
-			free(extractenv);
+			free(extenv);
 	}
 	return (NULL);
 }
