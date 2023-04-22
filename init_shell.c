@@ -3,7 +3,7 @@
 /**
  * execute - Execute function for simple_shell
  * @argv: Argument vector
- * Return: 0 on succes execution, -1 on exit
+ * Return: 0 on success execution, -1 on exit
  */
 
 int execute(char **argv)
@@ -32,7 +32,7 @@ char *get_errorline(char *sh_command, char *line)
 	if (line == NULL)
 		return (NULL);
 	total_len = _strlen(sh_command) + _strlen(line) + 20;
-	ret = _calloc(sizeof(*ret), total_len);
+	ret = _calloc(total_len, sizeof(*ret));
 	if (ret == NULL)
 		return (NULL);
 	_strcpy(ret, sh_command);
@@ -67,7 +67,7 @@ void env_builtin(void)
  * init_shell - Fuction to execute simple shell
  * @prompt: Prompt to print
  * @sh_command: command used to execute the shell
- * @aux: Auxiliar size_t to getline
+ * @aux: Auxiliary size_t to getline
  * Return: 0 on success execution, 1 on malloc failure
  */
 
@@ -80,7 +80,7 @@ int init_shell(char *prompt, char *sh_command, size_t aux)
 
 	while (1)
 	{
-		ISATTYPROMPT(prompt, _strlen(prompt));
+		CHECK_ISATTY_PROMPT(prompt, _strlen(prompt));
 		line = _calloc(100, sizeof(*line));
 		if (line == NULL)
 			return (1);
@@ -105,11 +105,11 @@ int init_shell(char *prompt, char *sh_command, size_t aux)
 				execute(argv);
 			else
 				wait(&status);
-			FREELAR(line, argvst, argv[0], argv, errorline);
+			FREE_RESOURCES_ON_ERROR(line, argvst, argv[0], argv, errorline);
 		}
 		else
-			FREEWRITE(line, argv, errorline);
-		ISATTYOUT;
+			FREE_RESOURCES_AND_EXIT(line, argv, errorline);
+		CHECK_ISATTY_RESULT(0);
 	}
 	free(line);
 	return (0);
