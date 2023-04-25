@@ -64,7 +64,7 @@ void env_builtin(void)
 }
 
 /**
- * shell - Fuction to execute simple shell
+ * init_shell - Fuction to execute simple shell
  * @prompt: Prompt to print
  * @sh_command: command used to execute the shell
  * @aux: Auxiliar size_t to getline
