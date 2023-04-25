@@ -14,6 +14,6 @@ int main(int argc __attribute__((unused)), char *argv[])
 
 	prompt = "($)";
 	aux = 1;
-	init_shell(prompt, argv[0], aux);
+	shell(prompt, argv[0], aux);
 	return (0);
 }
