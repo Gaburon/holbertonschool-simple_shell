@@ -2,6 +2,8 @@
 
 /**
  * _calloc - allocates memory for an array, using malloc.
+ * @nmemb: Amount of elements of the array
+ * @size: Size of each element
  * Return: pointer to the allocated memory, or NULL in fail
  */
 
