@@ -53,7 +53,7 @@ do {\
 
 /* functions */
 
-int shell(char *prompt, char *error, size_t aux);
+int init_shell(char *prompt, char *error, size_t aux);
 int linetoargv(char *line, char **argv, ssize_t linelen);
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
