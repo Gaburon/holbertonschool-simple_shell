@@ -71,7 +71,7 @@ void env_builtin(void)
  * Return: 0 on success execution, 1 on malloc failure
  */
 
-int init_shell(char *prompt, char *sh_command, size_t aux)
+int shell(char *prompt, char *sh_command, size_t aux)
 {
 	char **argv, *errorline, *line = NULL;
 	pid_t child_pid;
