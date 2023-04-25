@@ -9,16 +9,15 @@
 
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
-    char *ret;
+	char *ret;
 
-    if (nmemb == 0 || size == 0)
-        return NULL;
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	ret = malloc(nmemb * size);
+	if (ret == NULL)
+		return (NULL);
 
-    ret = malloc(nmemb * size);
-    if (ret == NULL)
-        return NULL;
+	memset(ret, 0, nmemb * size);
 
-    memset(ret, 0, nmemb * size);
-
-    return (ret);
+	return (ret);
 }
