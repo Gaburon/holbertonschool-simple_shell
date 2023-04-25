@@ -73,7 +73,7 @@ char *_strcat(char *dest, char *src)
  * _strcmp - compares 2 strings
  * @s1: Pointer to first string
  * @s2: Pointer to second string
- * Return: The difference between the 2 first different characters
+ * Return: The difference between the 2 first different characters in ASCII
  */
 
 int _strcmp(char *s1, char *s2)
