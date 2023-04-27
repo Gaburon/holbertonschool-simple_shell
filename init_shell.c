@@ -9,30 +9,13 @@
 
 int execute(char **argv)
 {
-    pid_t pid = fork();
-    if (pid == -1) {
-        perror("fork");
-        return -1;
-    } else if (pid == 0) {
-        execve(argv[0], argv, environ);
-        perror("execve");
-        exit(EXIT_FAILURE);
-    } else {
-        int status;
-        pid_t result = waitpid(pid, &status, 0);
-        
-        if (result == -1) {
-            perror("waitpid");
-            return -1;
-        } else if (WIFEXITED(status)) {
-            int exit_status = WEXITSTATUS(status);
-            printf("Child process exited with status %d\n", exit_status);
-        } else if (WIFSIGNALED(status)) {
-            int signal_number = WTERMSIG(status);
-            printf("Child process exited due to signal %d\n", signal_number);
-        }
-    }
-    return 0;
+	if (_strcmp(argv[0], "env") == 0)
+	{
+		env_builtin();
+		return (0);
+	}
+	execve(argv[0], argv, environ);
+	return (0);
 }
 /**
  * get_errorline - gets error line from line and shell
