@@ -32,6 +32,6 @@ $ gcc *.c -o hsh
 $ ./hsh
 ($)_
 ```
-#Authors
+###Authors
 * Jesús Andres Piedradhíta Ovalle <[Gaburon](https://github.com/Gaburon)>
 * Jorge Fernando Ochoa Morales <[goever1](https://github.com/goever1)>
