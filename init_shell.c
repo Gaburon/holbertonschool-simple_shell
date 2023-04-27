@@ -1,5 +1,4 @@
 #include "shell.h"
-#include <errno.h>
 
 /**
  * execute - Execute function for simple_shell
