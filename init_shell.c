@@ -6,17 +6,30 @@
  * Return: 0 on succes execution, -1 on exit
  */
 
-int execute(char **argv)
+void execute(char **args)
 {
-	if (_strcmp(argv[0], "env") == 0)
-	{
-		env_builtin();
-		return (0);
-	}
-	execve(argv[0], argv, environ);
-	return (0);
-}
+    pid_t pid;
+    int status;
 
+    pid = fork();
+    if (pid == 0) {
+        // Proceso hijo
+        execve(args[0], args, NULL);
+        perror(args[0]);
+        exit(EXIT_FAILURE);
+    } else if (pid < 0) {
+        // Error al crear el proceso hijo
+        perror("fork error");
+    } else {
+        // Proceso padre
+        wait(&status);
+        if (WIFEXITED(status)) {
+            // El proceso hijo terminó con éxito
+            int exit_status = WEXITSTATUS(status);
+            printf("Child process exited with status %d\n", exit_status);
+        }
+    }
+}
 /**
  * get_errorline - gets error line from line and shell
  * @sh_command: Command used to run the shell
