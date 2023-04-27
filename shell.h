@@ -2,8 +2,6 @@
 #define SHELL_H
 #define _GNU_SOURCE
 
-/* libraries */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,8 +11,6 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <string.h>
-
-/* macros */
 
 #define ISATTYOUT \
 do {\
