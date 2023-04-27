@@ -32,6 +32,16 @@ $ gcc *.c -o hsh
 $ ./hsh
 ($)_
 ```
+### Files
+The files needed to run the shell in a proper way and their description are listed below.
+|File| Description |
+|--|--|
+|`calloc.c`|it is the same as calloc stdlib.h function |
+|`init_shell.c`|it initialize and run the command interpreter|
+|`linetoargv.c`|it transforms a line into an array of strings. It is going to be used by the execve function|
+|`string_functions_shell.c`|it has modifying functions that were not needed on `_printf.c`|
+|`main.c`| main function for the shell program|
+
 ## Authors
 * Jesús Andres Piedradhíta Ovalle <[Gaburon](https://github.com/Gaburon)>
 * Jorge Fernando Ochoa Morales <[goever1](https://github.com/goever1)>
