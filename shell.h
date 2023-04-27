@@ -51,8 +51,6 @@ do {\
 		break;\
 } while (0)
 
-/* functions */
-
 int init_shell(char *prompt, char *error, size_t aux);
 int linetoargv(char *line, char **argv, ssize_t linelen);
 int _strlen(char *s);
