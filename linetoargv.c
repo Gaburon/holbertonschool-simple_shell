@@ -5,20 +5,31 @@
  * @name: Variable name
  * Return: Pointer to variable name, or NULL if variable hasn't be found
  */
-void builtin_env(void)
+
+char *_getenv(char *name)
 {
-	int i;
+	char *extractenv;
+	int difference, i, envlen;
 
-	if (environ)
+	for (i = 0; environ[i]; i++)
 	{
-		for (i = 0; environ[i]; i++)
+		envlen = _strlen(environ[i]);
+		extractenv = malloc(sizeof(*extractenv) * (envlen + 1));
+		if (extractenv == NULL)
+			return (NULL);
+		extractenv = _strcpy(extractenv, environ[i]);
+		extractenv = strtok(extractenv, "=");
+		difference = _strcmp(name, extractenv);
+		if (difference == 0)
 		{
-			write(STDOUT_FILENO, environ[i], strlen(environ[i]));
-			write(STDOUT_FILENO, "\n", 1);
+			free(extractenv);
+			return (environ[i]);
 		}
+		else
+			free(extractenv);
 	}
+	return (NULL);
 }
-
 
 /**
  * manage_path - Search for a file in the PATH
